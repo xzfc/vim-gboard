@@ -1,4 +1,4 @@
-*gboard.txt* goto clipboard
+*gboard.txt*            `gt` - goto clipboard
 
 INTRODUCTION                                             *gboard*
 
