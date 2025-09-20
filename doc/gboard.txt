@@ -1,0 +1,77 @@
+*gboard.txt* goto clipboard
+
+INTRODUCTION                                             *gboard*
+
+Edit the file whose name is found in the clipboard, similar to |gf| (goto file).
+Lets you quickly jump to a file mentioned in another terminal window.
+
+==============================================================================
+FILE AND LINE MATCHING                                   *gboard-match*
+
+Gboard searches the contents of |"*| and |"+| registers for file names and line
+numbers produced by common command-line tools.  The selection does not need to
+be precise, as long as the file path is present somewhere.  Particularly, the
+following match patterns are supported:
+
+• Whole register content is a file name.
+
+• File name with optional line and column numbers, e.g.:
+    `foo.txt`
+    `foo.txt:10`
+    `foo.txt:10:5`
+  Might appear anywhere in the register contents.
+
+• Multi-line grep-like output, in which the heading (file name) is followed
+  by lines prefixed by line numbers.
+
+  For example, the following register contents >
+    $ rg -wC1 SetCookie
+    src/btree.c
+    10392-** The schema layer numbers meta values differently.  At the schema
+    10393:** layer (and the SetCookie and ReadCookie opcodes) the number of
+    10394-** free pages is not visible.  So Cookie[0] is the same as Meta[1].
+
+    src/vdbe.c
+    4227-
+    4228:/* Opcode: SetCookie P1 P2 P3 * P5
+    4229-**
+<  matches `src/btree.c:10394` and `src/vdbe.c:4229` (last mentioned line number
+  for each paragraph).
+
+  Possible delimiters between line number and text are:
+    `:` `-`           produced by `rg`
+    `│` (U+2502)    produced by `ast-grep`
+
+
+Prefixes added by `git diff` (`a/` and `b/`) might be stripped.  E.g., the following
+line produced by `git log -p` >
+    +++ b/src/main.c
+matches `b/src/main.c`, and `src/main.c`.  Aside: you might want to configure git
+to not include these prefixes by setting `diff.noPrefix`, but this plugin does
+not require it.
+
+
+==============================================================================
+MAPS                                                    *gboard-maps*
+
+                                                        *gboard-gb*
+gb                      Edit the file whose name is found in the clipboard.
+                        Mnemonic: "Goto clipBoard".  Similar to |gf|.
+
+                                                        *gboard-gB*
+gB                      Like `gb`, but in a new tab.
+                        Similar to |CTRL-W_f|. (sorry, |CTRL-W_b| is taken by vim)
+
+                                                        *gboard-CTRL-W_gb*
+CTRL-W gb               Like `gb`, but in a split.
+                        Similar to |CTRL-W_gf|.
+
+
+If you prefer to set your own mappings instead, set *g:gboard_no_maps*, e.g. >
+    let g:gboard_no_maps = 1
+    nmap gy         <Plug>(gboard)
+    nmap <CTRL-W>y  <Plug>(gboard:split)
+    nmap <C-W>gy    <Plug>(gboard:tabedit)
+See the source for the full list of <Plug> mappings.
+
+ vim:tw=78:et:ft=help:norl:
