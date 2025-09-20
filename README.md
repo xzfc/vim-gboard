@@ -11,3 +11,8 @@ The selection does not need to be precise, as long as the file path is present s
 
 See [`:help gboard`](doc/gboard.txt) for details.
 Licensed under the terms of [Unlicense](UNLICENSE).
+
+Alternatives to this plugin:
+- `:e <C-r>+`
+- `:nnoremap <silent> gb :execute "edit " . @+<CR>`
+- [vinhtiensinh/clipboard_file_open](https://github.com/vinhtiensinh/clipboard_file_open)
