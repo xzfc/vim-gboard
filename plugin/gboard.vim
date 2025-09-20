@@ -1,3 +1,17 @@
+" `gt` - goto clipboard
+" License: This file is placed in the public domain.
+
+
+if exists("g:loaded_gboard")
+  finish
+endif
+let g:loaded_gboard = 1
+
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+
 if !exists("g:gboard_no_maps") || ! g:gboard_no_maps
   if has("nvim-0.4")
     call nvim_set_keymap('n', 'gb',      '<Plug>(gboard)',         { 'desc': 'Go to file in clipboard' })
@@ -90,3 +104,7 @@ function s:goto_clipboard(opener)
 
   echo "No valid filename found in the clipboard"
 endfunction
+
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
