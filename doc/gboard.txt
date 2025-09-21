@@ -2,16 +2,16 @@
 
 INTRODUCTION                                             *gboard*
 
-Edit the file whose name is found in the clipboard, similar to |gf| (goto file).
-Lets you quickly jump to a file mentioned in another terminal window.
+Edit the file whose name is found in the clipboard, similar to |gf| (goto
+file).  Lets you quickly jump to a file mentioned in another terminal window.
 
 ==============================================================================
 FILE AND LINE MATCHING                                   *gboard-match*
 
-Gboard searches the contents of |"*| and |"+| registers for file names and line
-numbers produced by common command-line tools.  The selection does not need to
-be precise, as long as the file path is present somewhere.  Particularly, the
-following match patterns are supported:
+Gboard searches the contents of |"*| and |"+| registers for file names and
+line numbers produced by common command-line tools.  The selection does not
+need to be precise, as long as the file path is present somewhere.
+Particularly, the following match patterns are supported:
 
 • Whole register content is a file name.
 
@@ -35,20 +35,20 @@ following match patterns are supported:
     4227-
     4228:/* Opcode: SetCookie P1 P2 P3 * P5
     4229-**
-<  matches `src/btree.c:10394` and `src/vdbe.c:4229` (last mentioned line number
-  for each paragraph).
+<  matches `src/btree.c:10394` and `src/vdbe.c:4229` (last mentioned line
+  number for each paragraph).
 
   Possible delimiters between line number and text are:
     `:` `-`           produced by `rg`
     `│` (U+2502)    produced by `ast-grep`
 
 
-Prefixes added by `git diff` (`a/` and `b/`) might be stripped.  E.g., the following
-line produced by `git log -p` >
+Prefixes added by `git diff` (`a/` and `b/`) might be stripped.  E.g., the
+following line produced by `git log -p` >
     +++ b/src/main.c
-matches `b/src/main.c`, and `src/main.c`.  Aside: you might want to configure git
-to not include these prefixes by setting `diff.noPrefix`, but this plugin does
-not require it.
+matches `b/src/main.c`, and `src/main.c`.  Aside: you might want to configure
+git to not include these prefixes by setting `diff.noPrefix`, but this plugin
+does not require it.
 
 
 ==============================================================================
@@ -60,7 +60,8 @@ gb                      Edit the file whose name is found in the clipboard.
 
                                                         *gboard-gB*
 gB                      Like `gb`, but in a new tab.
-                        Similar to |CTRL-W_f|. (sorry, |CTRL-W_b| is taken by vim)
+                        Similar to |CTRL-W_f|.  (sorry, |CTRL-W_b| is taken by
+                        vim)
 
                                                         *gboard-CTRL-W_gb*
 CTRL-W gb               Like `gb`, but in a split.
